@@ -1,5 +1,6 @@
 // Arquivo responsavel para armazenar as rotas
 const express = require('express')
+const { route } = require('express/lib/application')
 const routes = express.Router()
 
 let db = [
@@ -24,5 +25,17 @@ routes.post('/add', (req, res) => {
     return res.json(body)
 })
 
+routes.delete('/:id', (req, res) => {
+    const id = req.params.id
+
+    let newDB = db.filter(item => {
+        if(!item[id])
+            return item
+    })
+
+    db = newDB
+
+    return res.send(newDB)
+})
 
 module.exports = routes
