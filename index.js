@@ -16,6 +16,22 @@ let db = [
     { '3': {Nome: 'Cliente 3', Idade: '20'} }
 ]
 
+// Buscar Dados
+app.get('/', (req, res) => {
+    return res.json(db)
+})
+
+// Inserir Dados
+app.post('/add', (req, res) => {
+    const body = req.body
+
+    if (!body)
+        return res.status(400).end()
+    
+    db.push(body)
+    return res.json(body)
+})
+
 app.listen(21262, () => {
     console.log(`Express started at http://localhost:21262`)
 })
